@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserChoose from './UserChoose';
+import ListUsers from '../ListUsers';
+import UserDetail from '../UserDetail';
 
 class App extends Component {
   render() {
@@ -9,7 +10,13 @@ class App extends Component {
         <header className="App-header">
         </header>
         <p className="App-intro">
-          <UserChoose />
+        {this.props.current_user
+          ? <span>
+
+              <UserDetail />
+            </span>
+          : <ListUsers />
+        }
         </p>
       </div>
     );
