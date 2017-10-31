@@ -1,0 +1,13 @@
+ul.users {
+    display: flex; 
+    flex-direction: row; 
+    list-style: none;
+}
+
+ul.users > li {
+    margin : 10px 20px; 
+    border-radius: 2px; 
+    padding: 10px 20px; 
+    border: 1px solid skyblue;
+    cursor: pointer;
+}
