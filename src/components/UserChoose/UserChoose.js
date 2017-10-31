@@ -1,6 +1,6 @@
-import React from 'react'; 
+import React from 'react';
 import './UserChoose.css';
-import UserInterface from './UserInterface';
+import UserInterface from '../UserInterface';
 
 export default class UserChoose extends React.Component{
 
