@@ -1,11 +1,8 @@
-import React from 'react'; 
+import React from 'react';
 import {Table} from 'react-bootstrap';
 import {reduce, max} from 'underscore';
 
 export default class SetSalaire extends React.Component{
-    constructor(props){
-        super(props);
-    }
 
     saveSalaire(e){
         e.preventDefault();
@@ -13,11 +10,11 @@ export default class SetSalaire extends React.Component{
     }
 
     render(){
-        var chargeTotale = reduce(this.props.op, (memo, o) => (memo + o.montant), 0); 
+        var chargeTotale = reduce(this.props.op, (memo, o) => (memo + o.montant), 0);
         var users = this.props.users.map((u) => {
             return u.salaire >= chargeTotale ? { ...u, salaire:chargeTotale} : u
         });
-        var maxSalaire = (max(users, (u) => (u.salaire))).salaire; 
+        var maxSalaire = (max(users, (u) => (u.salaire))).salaire;
         var pourcentageMax = maxSalaire*100/reduce(users, (memo, u) => (memo + u.salaire), 0);
         var montantMin = chargeTotale-(pourcentageMax*chargeTotale/100);
         var montantMax = chargeTotale-montantMin;

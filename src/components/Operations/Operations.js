@@ -1,11 +1,8 @@
-import React from 'react'; 
+import React from 'react';
 import {reduce} from 'underscore';
 import {Table} from 'react-bootstrap';
 
 export default class SetOperation extends React.Component{
-    constructor(props){
-        super(props); 
-    }
 
     saveOperation(e){
         e.preventDefault();

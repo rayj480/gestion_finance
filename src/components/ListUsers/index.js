@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import UserChoose from './UserChoose';
+import ListUsers from './ListUsers';
 import { currentUser } from '../../actions';
 
 export default connect((state) => {
@@ -13,4 +13,4 @@ export default connect((state) => {
           dispatch(currentUser(id));
       }
   }
-})(UserChoose);
+})(ListUsers);

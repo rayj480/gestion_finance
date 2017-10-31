@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { filter } from 'underscore';
-import SetSalaire from './SetSalaire';
+import Salaires from './Salaires';
 import { saveSalaire } from '../../actions';
 
 export default connect((state) => {
@@ -18,4 +18,4 @@ export default connect((state) => {
           dispatch(saveSalaire(userid, montant))
       }
   }
-})(SetSalaire)
+})(Salaires)
