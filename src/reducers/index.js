@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {findWhere, filter} from 'underscore';
+import  * as ActionType from '../constants'
 var uuidv4 = require('uuid/v4');
 
 export function createReducer(initialState, handlers) {
@@ -14,15 +15,15 @@ export function createReducer(initialState, handlers) {
 
 var list_users = [
     {
-        id: 1, 
-        nom: 'CARI', 
-        prenom: 'Jonathan', 
+        id: 1,
+        nom: 'CARI',
+        prenom: 'Jonathan',
         salaire: 0
-    }, 
+    },
     {
-        id: 2, 
-        nom: 'GAILLARDON', 
-        prenom: 'Jeanne', 
+        id: 2,
+        nom: 'GAILLARDON',
+        prenom: 'Jeanne',
         salaire: 1000
     }
 ];
@@ -31,28 +32,28 @@ var list_users = [
 var initialState = {
     op_recurentes: [{
         id: uuidv4(),
-        libelle: 'opération 1', 
-        montant: 200, 
+        libelle: 'opération 1',
+        montant: 200,
         userid: 1
     }, {
         id: uuidv4(),
-        libelle: 'opération 2', 
-        montant: 200, 
+        libelle: 'opération 2',
+        montant: 200,
         userid: null
     }, {
         id: uuidv4(),
-        libelle: 'opération 3', 
-        montant: 200, 
+        libelle: 'opération 3',
+        montant: 200,
         userid: 1
     }],
-    users : list_users, 
+    users : list_users,
     current_user: null
 }
 
 var saveUserSalaire = (state, action) => {
     if(action.userid === state.id){
         return {
-            ...state, 
+            ...state,
             salaire : action.montant
         }
     }else{
@@ -62,12 +63,12 @@ var saveUserSalaire = (state, action) => {
 
 var saveSalaire = (state, action) => {
     return {
-        ...state, 
+        ...state,
         users: state.users.map((u) => {
             return saveUserSalaire(u, action);
-        }), 
+        }),
         current_user: {
-            ...state.current_user, 
+            ...state.current_user,
             salaire: action.montant
         }
     };
@@ -75,13 +76,13 @@ var saveSalaire = (state, action) => {
 
 var createOperation = (state, action) => {
     return {
-        ...state, 
+        ...state,
         op_recurentes: [
-            ...state.op_recurentes, 
+            ...state.op_recurentes,
             {
                 id: uuidv4(),
-                libelle: action.libelle, 
-                montant: action.montant, 
+                libelle: action.libelle,
+                montant: action.montant,
                 userid: action.userid
             }
         ]
@@ -91,7 +92,7 @@ var createOperation = (state, action) => {
 
 var deleteOperation = (state, action) => {
     return {
-        ...state, 
+        ...state,
         op_recurentes: filter(state.op_recurentes, (o) => {
             return o.id !== action.id
         })}
@@ -99,17 +100,17 @@ var deleteOperation = (state, action) => {
 
 var setCurrentUser = (state, action) => {
     return {
-        ...state, 
+        ...state,
         current_user: findWhere(state.users, {id: action.id})
     };
 };
 
 
 var appReducers = createReducer(initialState, {
-    'SET_CURRENT_USER': setCurrentUser, 
-    'CREATE_OPERATION': createOperation, 
-    'DELETE_OPERATION': deleteOperation, 
-    'SAVE_SALAIRE': saveSalaire
+    [ActionType.SET_CURRENT_USER]: setCurrentUser,
+    [ActionType.CREATE_OPERATION]: createOperation,
+    [ActionType.DELETE_OPERATION]: deleteOperation,
+    [ActionType.SAVE_SALAIRE]: saveSalaire
 })
 
 // const gestionReducers = combineReducers(appReducers);

@@ -1,6 +1,7 @@
-import React from 'react'; 
+import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
-import {ListeOperations, Recap} from './containers';
+import SetOperation from './SetOperation';
+import SetSalaire from './SetSalaire';
 
 export default class UserInterface extends React.Component{
     constructor(props){
@@ -11,8 +12,8 @@ export default class UserInterface extends React.Component{
         return (
             <div>
                 <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                    <Tab eventKey={1} title="Opérations récurrentes"><ListeOperations /></Tab>
-                    <Tab eventKey={2} title="Déclaration salaire"><Recap /></Tab>
+                    <Tab eventKey={1} title="Opérations récurrentes"><SetOperation /></Tab>
+                    <Tab eventKey={2} title="Déclaration salaire"><SetSalaire /></Tab>
                 </Tabs>
             </div>
         )
