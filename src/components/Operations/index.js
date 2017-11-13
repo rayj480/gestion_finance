@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Operations from './Operations';
-import { createOperation, deleteOperation } from '../../actions';
+import { deleteOperation } from '../../actions';
+
 
 export default connect((state) => {
   return {
@@ -9,9 +10,6 @@ export default connect((state) => {
   }
 }, (dispatch) => {
   return {
-      createOp: (libelle, montant, userid) => {
-          dispatch(createOperation(libelle, montant, userid))
-      },
       deleteOp: (id) => {
           dispatch(deleteOperation(id));
       }
