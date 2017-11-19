@@ -1,19 +1,9 @@
 import React from 'react';
 import {reduce} from 'underscore';
 import {Table} from 'react-bootstrap';
-import { createOperation } from '../../actions';
 
 
 /// Thunks 
-
-var t_createOperation = (libelle, montant, userid) => {
-    
-    return function (dispatch) {
-        
-        dispatch(createOperation(libelle, montant, userid))
-    }
-}
-
 
 
 export default class SetOperation extends React.Component{
@@ -21,7 +11,7 @@ export default class SetOperation extends React.Component{
     saveOperation(e){
         e.preventDefault();
         // this.props.createOp(this.libelle.value, Number.parseInt(this.montant.value), this.userid.value);
-        this.props.dispatch(t_createOperation(this.libelle.value, Number.parseInt(this.montant.value), this.userid.value))
+        this.props.createOperation(this.libelle.value, Number.parseInt(this.montant.value), this.userid.value);
     }
 
     delOperation(id){

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Operations from './Operations';
-import { deleteOperation } from '../../actions';
+import {t_createOperation } from '../../actions';
+import { bindActionCreators } from 'redux';
 
 
 export default connect((state) => {
@@ -10,8 +11,6 @@ export default connect((state) => {
   }
 }, (dispatch) => {
   return {
-      deleteOp: (id) => {
-          dispatch(deleteOperation(id));
-      }
+      createOperation: bindActionCreators(t_createOperation, dispatch)
   }
 })(Operations)

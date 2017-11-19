@@ -1,11 +1,15 @@
 import * as ActionType from '../constants';
+import * as API from '../../api';
+
+
+/// Action Creators
 
 export var currentUser = (p_id) => ({
     type: ActionType.SET_CURRENT_USER,
     id: p_id
 });
 
-export var createOperation = (p_libelle, p_montant, p_userid) => ({
+var createOperation = (p_libelle, p_montant, p_userid) => ({
     type: ActionType.CREATE_OPERATION,
     libelle: p_libelle,
     montant: p_montant,
@@ -23,5 +27,16 @@ export var saveSalaire = (p_userid, p_montant) => {
         type: ActionType.SAVE_SALAIRE,
         userid: p_userid,
         montant: p_montant
+    }
+}
+
+/// Thunks
+
+export var t_createOperation = (libelle, montant, userid) => {
+    
+    return function (dispatch) {
+        API.CreateOperation(libelle, montant, userid).then((data) => {
+            dispatch(createOperation(libelle, montant, userid))
+        })
     }
 }
