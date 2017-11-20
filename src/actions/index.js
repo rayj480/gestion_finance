@@ -1,5 +1,5 @@
 import * as ActionType from '../constants';
-import * as API from '../../api';
+import * as API from '../api';
 
 
 /// Action Creators
