@@ -77,8 +77,8 @@ var saveSalaire = (state, action) => {
 var createOperation = (state, action) => {
     return {
         ...state,
-        op_recurentes: [
-            ...state.op_recurentes,
+        operations: [
+            ...state.operations,
             {
                 id: uuidv4(),
                 libelle: action.libelle,
@@ -105,12 +105,20 @@ var setCurrentUser = (state, action) => {
     };
 };
 
+var getOperations = (state, action) => {
+    return {
+        ...state, 
+        operations: action.operations
+    }
+}
+
 
 var appReducers = createReducer(initialState, {
     [ActionType.SET_CURRENT_USER]: setCurrentUser,
     [ActionType.CREATE_OPERATION]: createOperation,
     [ActionType.DELETE_OPERATION]: deleteOperation,
-    [ActionType.SAVE_SALAIRE]: saveSalaire
+    [ActionType.SAVE_SALAIRE]: saveSalaire, 
+    [ActionType.FETCH_OPERATIONS]: getOperations
 })
 
 // const gestionReducers = combineReducers(appReducers);

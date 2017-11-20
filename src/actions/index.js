@@ -30,6 +30,13 @@ export var saveSalaire = (p_userid, p_montant) => {
     }
 }
 
+var fetchOperation = (data) => {
+    return {
+        type: ActionType.FETCH_OPERATIONS, 
+        operations: data
+    }
+}
+
 /// Thunks
 
 export var t_createOperation = (libelle, montant, userid) => {
@@ -37,6 +44,15 @@ export var t_createOperation = (libelle, montant, userid) => {
     return function (dispatch) {
         API.CreateOperation(libelle, montant, userid).then((data) => {
             dispatch(createOperation(libelle, montant, userid))
+        })
+    }
+}
+
+export var t_fetchOperation = () => {
+    return (dispatch) => {
+        API.GetOperation().then((data) => {
+            console.log(data);
+            dispatch(fetchOperation(data));
         })
     }
 }
