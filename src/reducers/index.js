@@ -28,9 +28,9 @@ var list_users = [
     }
 ];
 
-
+    
 var initialState = {
-    op_recurentes: [{
+/* op_recurentes: [{
         id: uuidv4(),
         libelle: 'opération 1',
         montant: 200,
@@ -45,7 +45,7 @@ var initialState = {
         libelle: 'opération 3',
         montant: 200,
         userid: 1
-    }],
+    }], */
     users : list_users,
     current_user: null
 }

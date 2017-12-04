@@ -2,6 +2,7 @@ import React from 'react';
 import {reduce} from 'underscore';
 import {Table} from 'react-bootstrap';
 import {GetOperation} from '../../api';
+import {findWhere} from 'underscore';
 
 
 /// Thunks 
@@ -42,13 +43,25 @@ export default class SetOperation extends React.Component{
                     <button onClick={this.saveOperation.bind(this)}>Ajouter</button>
                 </form>
                 <Table striped bordered condensed hover>
-                    <thead><tr><th>Libellé</th><th>Montant</th><th>Actions</th></tr></thead>
-                    { console.log(this.props.operations) }
+                    <thead>
+                        <tr>
+                            <th>Libellé</th>
+                            <th>Montant</th>
+                            <th>Qui ?</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    { console.log(this.props.users) }
                     {this.props.operations ? this.props.operations.map((o) => {
-                        return <tr><td>{o.libelle}</td><td>{o.montant} €</td><td><span onClick={(id) => {this.props.deleteOp(o.id)}}>Supprimer</span></td></tr>
+                        return <tr>
+                                    <td>{o.libelle}</td>
+                                    <td>{o.montant} €</td>
+                                    <td>{ o.userid || o.userid !== '' === 0 ? (findWhere(this.props.users, {id: Number.parseInt(o.userid)}).prenom + ' ' + findWhere(this.props.users, {id: Number.parseInt(o.userid)}).nom) : '' }</td>
+                                    <td><span onClick={(id) => {this.props.deleteOp(o.id)}}>Supprimer</span></td>
+                                </tr>
                     }) : ""}
                 </Table>
-                <div>Charges totale du ménage : { reduce(this.props.operations, (memo, o) => (memo + o.montant), 0) } €</div>
+                <div>Charges totale du ménage : { reduce(this.props.operations, (memo, o) => (memo + Number.parseInt(o.montant)), 0) } €</div>
             </div>
         )
     }
