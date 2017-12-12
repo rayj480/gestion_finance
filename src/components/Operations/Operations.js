@@ -3,6 +3,7 @@ import {reduce} from 'underscore';
 import {Table} from 'react-bootstrap';
 import {GetOperation} from '../../api';
 import {findWhere} from 'underscore';
+import { isBoolean } from 'util';
 
 
 /// Thunks 
@@ -19,7 +20,7 @@ export default class SetOperation extends React.Component{
     saveOperation(e){
         e.preventDefault();
         // this.props.createOp(this.libelle.value, Number.parseInt(this.montant.value), this.userid.value);
-        this.props.createOperation(this.libelle.value, Number.parseInt(this.montant.value), this.userid.value);
+        this.props.createOperation(this.libelle.value, Number.parseInt(this.montant.value), this.userid.value, this.nextmonth.checked.toString());
     }
 
     delOperation(id){
@@ -40,6 +41,7 @@ export default class SetOperation extends React.Component{
                             return <option value={u.id}>{u.nom + " " + u.prenom}</option>
                         })}
                     </select>
+                    <label for="op_nextmonth">Pour le mois prochain</label><input ref={(input) => this.nextmonth = input} id="op_nextmonth" type="checkbox" />
                     <button onClick={this.saveOperation.bind(this)}>Ajouter</button>
                 </form>
                 <Table striped bordered condensed hover>
@@ -48,6 +50,7 @@ export default class SetOperation extends React.Component{
                             <th>Libellé</th>
                             <th>Montant</th>
                             <th>Qui ?</th>
+                            <th>Pour le mois prochain</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -57,6 +60,7 @@ export default class SetOperation extends React.Component{
                                     <td>{o.libelle}</td>
                                     <td>{o.montant} €</td>
                                     <td>{ o.userid || o.userid !== '' === 0 ? (findWhere(this.props.users, {id: Number.parseInt(o.userid)}).prenom + ' ' + findWhere(this.props.users, {id: Number.parseInt(o.userid)}).nom) : '' }</td>
+                                    <td>{o.nextmonth === "true" ? 'oui' : 'non'}</td>
                                     <td><span onClick={(id) => {this.props.deleteOp(o.id)}}>Supprimer</span></td>
                                 </tr>
                     }) : ""}

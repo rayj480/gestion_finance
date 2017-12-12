@@ -83,7 +83,8 @@ var createOperation = (state, action) => {
                 id: uuidv4(),
                 libelle: action.libelle,
                 montant: action.montant,
-                userid: action.userid
+                userid: action.userid, 
+                nextmonth: action.nextmonth
             }
         ]
     }

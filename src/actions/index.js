@@ -9,11 +9,12 @@ export var currentUser = (p_id) => ({
     id: p_id
 });
 
-var createOperation = (p_libelle, p_montant, p_userid) => ({
+var createOperation = (p_libelle, p_montant, p_userid, p_nextmonth) => ({
     type: ActionType.CREATE_OPERATION,
     libelle: p_libelle,
     montant: p_montant,
-    userid: p_userid
+    userid: p_userid, 
+    nextmonth: p_nextmonth
 })
 
 
@@ -39,11 +40,11 @@ var fetchOperation = (data) => {
 
 /// Thunks
 
-export var t_createOperation = (libelle, montant, userid) => {
+export var t_createOperation = (libelle, montant, userid, nextmonth) => {
     
     return function (dispatch) {
-        API.CreateOperation(libelle, montant, userid).then((data) => {
-            dispatch(createOperation(libelle, montant, userid))
+        API.CreateOperation(libelle, montant, userid, nextmonth).then((data) => {
+            dispatch(createOperation(libelle, montant, userid, nextmonth))
         })
     }
 }

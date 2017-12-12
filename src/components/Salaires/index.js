@@ -9,7 +9,7 @@ export default connect((state) => {
       user: state.current_user,
       op: state.op_recurentes,
       operations: filter(state.op_recurentes, (o) => {
-          return o.userid === state.current_user.id
+          return o.userid === state.current_user.id && o.nextmonth === "false"
       })
   }
 }, (dispatch) => {

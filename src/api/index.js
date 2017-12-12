@@ -1,6 +1,6 @@
 import * as reqwest from 'reqwest';
 
-export var CreateOperation = (libelle, montant, userid) => {
+export var CreateOperation = (libelle, montant, userid, nextmonth) => {
     return reqwest({
         url: 'http://localhost:3001/api/operation', 
         method: 'post', 
@@ -11,7 +11,8 @@ export var CreateOperation = (libelle, montant, userid) => {
         data: {
             libelle: libelle, 
             montant: montant, 
-            userid: userid
+            userid: userid, 
+            nextmonth: nextmonth
         }
     })
 }
